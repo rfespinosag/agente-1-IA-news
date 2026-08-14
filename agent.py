@@ -44,6 +44,7 @@ def run_agent() -> str:
     start = now - timedelta(hours=24)
     local_now = now.astimezone(ZoneInfo(os.getenv("TIMEZONE", "America/Mexico_City")))
     destination = required("DESTINATION_EMAIL")
+    gmail_account = os.getenv("COMPOSIO_GMAIL_ACCOUNT_ALIAS", "rfeg1980").strip()
     notion_parent = os.getenv("NOTION_PARENT_PAGE_ID", "").strip()
     parent_instruction = (
         f"Crea la página dentro del parent page de Notion con ID {notion_parent}."
@@ -64,6 +65,7 @@ Ejecuta el boletín diario de noticias de inteligencia artificial.
 Fecha/hora actual local: {local_now.isoformat()}.
 Ventana exacta de búsqueda: desde {start.isoformat()} hasta {now.isoformat()} (últimas 24 horas).
 Destinatario del correo: {destination}.
+Cuenta Gmail remitente de Composio: usa exclusivamente la conexión identificada como "{gmail_account}".
 
 Proceso obligatorio:
 1. Usa el servidor MCP de Exa para buscar noticias reales, relevantes y publicadas dentro de esa ventana. Prioriza anuncios, investigación, modelos, regulación y productos con impacto amplio. No inventes ni rellenes noticias si hay menos de cinco resultados válidos.

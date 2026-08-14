@@ -21,6 +21,7 @@ jobs:
       EXA_MCP_TOKEN: ${{ secrets.EXA_MCP_TOKEN }}
       COMPOSIO_MCP_URL: https://connect.composio.dev/mcp
       COMPOSIO_MCP_API_KEY: ${{ secrets.COMPOSIO_MCP_API_KEY }}
+      COMPOSIO_GMAIL_ACCOUNT_ALIAS: rfeg1980
       DESTINATION_EMAIL: rogeliofespinosagarcia@gmail.com
       TIMEZONE: America/Mexico_City
       NOTION_PARENT_PAGE_ID: 3bce452e012f8024b193daa7632f731e
