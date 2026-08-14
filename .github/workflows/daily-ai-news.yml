@@ -1,0 +1,37 @@
+name: Boletín diario de noticias de IA
+
+on:
+  schedule:
+    # 13:00 UTC = 07:00 America/Mexico_City (Ciudad de México).
+    - cron: "0 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  daily-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      OPENAI_MODEL: gpt-5
+      EXA_MCP_URL: https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa
+      EXA_MCP_TOKEN: ${{ secrets.EXA_MCP_TOKEN }}
+      COMPOSIO_MCP_URL: https://connect.composio.dev/mcp
+      COMPOSIO_MCP_API_KEY: ${{ secrets.COMPOSIO_MCP_API_KEY }}
+      DESTINATION_EMAIL: rogeliofespinosagarcia@gmail.com
+      TIMEZONE: America/Mexico_City
+      NOTION_PARENT_PAGE_ID: 3bce452e012f8024b193daa7632f731e
+    steps:
+      - name: Descargar proyecto
+        uses: actions/checkout@v4
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+      - name: Ejecutar boletín
+        run: python agent.py --once
