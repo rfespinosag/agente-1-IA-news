@@ -17,8 +17,6 @@ jobs:
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       OPENAI_MODEL: gpt-5
-      EXA_MCP_URL: https://mcp.exa.ai/mcp?tools=web_search_exa,web_fetch_exa,web_search_advanced_exa
-      EXA_MCP_TOKEN: ${{ secrets.EXA_MCP_TOKEN }}
       COMPOSIO_MCP_URL: https://connect.composio.dev/mcp
       COMPOSIO_MCP_API_KEY: ${{ secrets.COMPOSIO_MCP_API_KEY }}
       COMPOSIO_GMAIL_ACCOUNT_ALIAS: rfeg1980

@@ -32,7 +32,7 @@ Completa `.env` y prueba manualmente:
 python agent.py --once
 ```
 
-Si usas un único servidor MCP de Composio para Notion y Gmail, coloca en `.env` la URL `https://connect.composio.dev/mcp` y la API key de Composio en `COMPOSIO_MCP_API_KEY`. El agente la envía mediante el encabezado `x-consumer-api-key`; no la compartas en el chat ni la guardes en Git.
+El agente usa un único servidor MCP de Composio para Exa, Notion y Gmail. Coloca en `.env` la URL `https://connect.composio.dev/mcp` y la API key de Composio en `COMPOSIO_MCP_API_KEY`. El agente la envía mediante el encabezado `x-consumer-api-key`; no la compartas en el chat ni la guardes en Git.
 
 ## Ejecución autónoma en la nube (recomendado)
 
@@ -41,7 +41,6 @@ El archivo `.github/workflows/daily-ai-news.yml` ejecuta el agente todos los dí
 En el repositorio de GitHub, ve a `Settings → Secrets and variables → Actions` y crea estos secretos:
 
 - `OPENAI_API_KEY`
-- `EXA_MCP_TOKEN`
 - `COMPOSIO_MCP_API_KEY`
 
 Después de publicar el proyecto, puedes lanzar una prueba desde `Actions → Boletín diario de noticias de IA → Run workflow`.

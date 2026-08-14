@@ -39,6 +39,16 @@ def mcp_server(label: str, url_name: str, token_name: str, allowed_name: str) ->
     return server
 
 
+def composio_mcp_server() -> dict:
+    return {
+        "type": "mcp",
+        "server_label": "composio",
+        "server_url": required("COMPOSIO_MCP_URL"),
+        "headers": {"x-consumer-api-key": required("COMPOSIO_MCP_API_KEY")},
+        "require_approval": "never",
+    }
+
+
 def run_agent() -> str:
     now = datetime.now(timezone.utc)
     start = now - timedelta(hours=24)
@@ -53,11 +63,7 @@ def run_agent() -> str:
     )
 
     client = OpenAI(api_key=required("OPENAI_API_KEY"))
-    tools = [
-        mcp_server("exa", "EXA_MCP_URL", "EXA_MCP_TOKEN", "EXA_ALLOWED_TOOLS"),
-        mcp_server("notion", "NOTION_MCP_URL", "NOTION_MCP_TOKEN", "NOTION_ALLOWED_TOOLS"),
-        mcp_server("gmail", "GMAIL_MCP_URL", "GMAIL_MCP_TOKEN", "GMAIL_ALLOWED_TOOLS"),
-    ]
+    tools = [composio_mcp_server()]
 
     prompt = f"""
 Ejecuta el boletín diario de noticias de inteligencia artificial.
@@ -68,6 +74,7 @@ Destinatario del correo: {destination}.
 Cuenta Gmail remitente de Composio: usa exclusivamente la conexión identificada como "{gmail_account}".
 
 Proceso obligatorio:
+Usa exclusivamente las herramientas de Exa disponibles dentro del servidor MCP de Composio para la búsqueda. No uses otro buscador. Usa exclusivamente URLs devueltas por Exa a través de Composio.
 1. Usa el servidor MCP de Exa para buscar noticias reales, relevantes y publicadas dentro de esa ventana. Prioriza anuncios, investigación, modelos, regulación y productos con impacto amplio. No inventes ni rellenes noticias si hay menos de cinco resultados válidos.
 2. Selecciona como máximo 5 noticias distintas. Para cada una redacta en español un resumen de 2-3 frases y conserva título, fuente, fecha de publicación y URL original.
 3. Usa el servidor MCP de Notion para crear una página titulada "Noticias de IA — {local_now.strftime('%Y-%m-%d')}". {parent_instruction} Incluye fecha de generación, una introducción corta y una sección numerada con cada noticia y su enlace.
