@@ -1,4 +1,5 @@
 name: Boletín diario de noticias de IA
+run-name: Boletín IA ${{ github.run_number }}
 
 on:
   schedule:
