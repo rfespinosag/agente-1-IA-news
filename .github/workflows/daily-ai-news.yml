@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 15
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      OPENAI_MODEL: gpt-5
+      OPENAI_MODEL: gpt-5-mini
       COMPOSIO_MCP_URL: https://connect.composio.dev/mcp
       COMPOSIO_MCP_API_KEY: ${{ secrets.COMPOSIO_MCP_API_KEY }}
       COMPOSIO_GMAIL_ACCOUNT_ALIAS: rfeg1980
